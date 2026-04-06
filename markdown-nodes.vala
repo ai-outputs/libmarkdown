@@ -4,7 +4,7 @@
  * 本模块实现了 Markdown 文档对象模型（DOM）的核心节点类。
  * 提供了完整的节点树结构，支持块级和行内元素。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

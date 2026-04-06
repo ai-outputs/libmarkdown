@@ -10,7 +10,7 @@
  *       markdown-reader.vala markdown-writer.vala \
  *       markdown.vala example-yaml.vala -o yaml-example
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

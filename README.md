@@ -1,6 +1,6 @@
 # Vala Markdown 模块
 
-一个完整的 Markdown 读写模块，为 Vala 语言客户端提供 Agent Skill 支持。支持 YAML Front Matter 元数据解析。
+一个完整的 Markdown 读写模块，为 Vala 语言客户端提供 Skill 支持。支持 YAML Front Matter 元数据解析。
 
 ## 概述
 
@@ -377,8 +377,7 @@ categories:
 MIT License
 
 ## 作者
-
-Agent Skill Support Team
+GLM 5 / Taozuhong
 
 ## 版本历史
 

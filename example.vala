@@ -12,7 +12,7 @@
  * 运行方法：
  * ./markdown-example
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

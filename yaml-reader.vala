@@ -4,7 +4,7 @@
  * 本模块实现了 YAML Front Matter 的解析功能。
  * 支持 Markdown 文档开头的 YAML 元数据块解析。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

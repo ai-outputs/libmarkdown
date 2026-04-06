@@ -4,7 +4,7 @@
  * 本模块定义了 Markdown 内存表示的核心类型系统，
  * 包括节点类型枚举、访问者接口和基础抽象类。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

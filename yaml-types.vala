@@ -4,7 +4,7 @@
  * 本模块定义了 YAML Front Matter 元数据的类型系统，
  * 包括 YAML 值类型、元数据节点和访问接口。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

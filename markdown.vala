@@ -58,7 +58,7 @@
  *    - 支持自定义输出格式
  *    - 辅助工具：NodePrinter, NodeCounter
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  * @see NodeType
  * @see Node

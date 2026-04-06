@@ -4,7 +4,7 @@
  * 本模块实现了将 Markdown 节点树序列化为文本的功能。
  * 支持多种输出格式和渲染选项。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

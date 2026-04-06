@@ -4,7 +4,7 @@
  * 本模块实现了完整的 Markdown 解析功能，将 Markdown 文本转换为内存中的节点树。
  * 支持 CommonMark 规范、GitHub Flavored Markdown 扩展和 YAML Front Matter。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 

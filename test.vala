@@ -3,7 +3,7 @@
  * 
  * 本文件包含模块的完整单元测试。
  * 
- * @author Agent Skill Support
+ * @author GLM-5 / Taozuhong
  * @version 1.0.0
  */
 
