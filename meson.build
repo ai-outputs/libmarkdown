@@ -1,87 +1,76 @@
-# Vala Markdown Module - Meson 构建配置
-# 
-# 使用方法：
-#   meson setup build
-#   cd build
-#   ninja
-#   ninja test
-#   ninja install
-
-project(
-    'vala-markdown',
-    ['vala', 'c'],
-    version: '1.1.0',
-    meson_version: '>= 0.50.0',
-    default_options: [
-        'warning_level=2',
-        'werror=false',
-    ]
+project('markdown-vala', 'vala', 'c',
+  version: '1.0.0',
+  meson_version: '>= 0.50.0',
+  default_options: ['warning_level=2']
 )
 
-# 依赖项
-glib_dep = dependency('glib-2.0', version: '>= 2.50')
-gobject_dep = dependency('gobject-2.0', version: '>= 2.50')
-gio_dep = dependency('gio-2.0', version: '>= 2.50')
-gee_dep = dependency('gee-0.8', version: '>= 0.20')
+# Dependencies
+gio_dep = dependency('gio-2.0', required: true)
+gee_dep = dependency('gee-0.8', required: true)
+gtk_dep = dependency('gtk4', required: false)
 
-# 源文件（按依赖顺序）
-sources = files(
-    'yaml-types.vala',
-    'yaml-reader.vala',
-    'markdown-types.vala',
-    'markdown-nodes.vala',
-    'markdown-reader.vala',
-    'markdown-writer.vala',
-    'markdown.vala'
+# Sources
+markdown_sources = files(
+  'src/markdown.vala',
+  'src/markdown-parser.vala',
+  'src/markdown-writer.vala',
+  'src/html-renderer.vala',
+  'src/pango-renderer.vala'
 )
 
-# 编译库
-markdown_lib = shared_library(
-    'markdown',
-    sources,
-    dependencies: [glib_dep, gobject_dep, gio_dep, gee_dep],
-    install: true,
+# Library dependencies
+markdown_deps = [gio_dep, gee_dep]
+
+if gtk_dep.found()
+  markdown_deps += [gtk_dep]
+endif
+
+# Build shared library
+markdown_lib = shared_library('markdown',
+  markdown_sources,
+  dependencies: markdown_deps,
+  install: true,
+  vala_args: ['--target-glib=2.50'],
 )
 
-# 编译主示例程序
-example_exe = executable(
-    'markdown-example',
-    sources + files('example.vala'),
-    dependencies: [glib_dep, gobject_dep, gio_dep, gee_dep],
-    install: false
+markdown_dep = declare_dependency(
+    link_with: markdown_lib,
+    dependencies: markdown_deps,
+    include_directories: [include_directories('.')]
 )
 
-# 编译 YAML 示例程序
-yaml_example_exe = executable(
-    'yaml-example',
-    sources + files('example-yaml.vala'),
-    dependencies: [glib_dep, gobject_dep, gio_dep, gee_dep],
-    install: false
+# Example: CLI tool
+executable('markdown-cli',
+  'examples/markdown-cli.vala',
+  dependencies: [gio_dep, gee_dep, markdown_dep],
+  link_with: markdown_lib,
+  install: false,
 )
 
-# 测试程序
-test_exe = executable(
-    'markdown-test',
-    sources + files('test.vala'),
-    dependencies: [glib_dep, gobject_dep, gio_dep, gee_dep],
-    install: false
+# Example: GTK Editor (if GTK available)
+if gtk_dep.found()
+  executable('markdown-editor',
+    'examples/markdown-editor.vala',
+    dependencies: [gio_dep, gee_dep, gtk_dep, markdown_dep],
+    link_with: markdown_lib,
+    install: false,
+  )
+endif
+
+# Tests
+test_exe = executable('markdown-tests',
+  'tests/test-basic.vala',
+  dependencies: [gio_dep, gee_dep, markdown_dep],
+  link_with: markdown_lib,
 )
 
-# 定义测试
-test('markdown-tests', test_exe)
+test('markdown-basic', test_exe)
 
-# Pkg-config 文件
+# pkg-config file
 pkg = import('pkgconfig')
 pkg.generate(markdown_lib,
-    name: 'markdown',
-    description: 'Vala Markdown parsing and rendering library with YAML support',
-    version: meson.project_version()
+  subdirs: 'markdown',
+  name: 'markdown-vala',
+  description: 'Markdown processing library for Vala',
+  version: meson.project_version(),
 )
-
-# 总结
-summary({
-    'Version': meson.project_version(),
-    'Prefix': get_option('prefix'),
-    'Library': markdown_lib.name(),
-    'Features': 'YAML Front Matter, GFM Extensions',
-}, section: 'Configuration')
